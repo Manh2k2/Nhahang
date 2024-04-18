@@ -1,0 +1,488 @@
+:root{  /* là một pseudo-class selector, :root thường được sử dụng để đặt các biến CSS tùy chỉnh bằng cách sử dụng khai báo biến --.*/
+    --main-coler:#191F3A;/*Đây là biến cho màu chính của trang web, được đặt là màu xanh đậm .*/
+    --sub-coler:#EAA023; 
+    --test-coler:#ffffff;
+    --bg-coler:#0c1023;
+}
+*{  /* chọn tất cả các phần tử trên trang web.*/
+    /*Bằng cách đặt chúng là 0, bạn đang loại bỏ khoảng trống mặc định này, giúp kiểm soát được giao diện trang web một cách chặt chẽ hơn*/
+    margin: 0; /*khoảng cách giữa các phần tử*/
+    padding: 0; /*hoảng cách giữa nội dung của một phần tử và viền của nó*/
+    outline: none;/*Bằng cách đặt chúng là 0, bạn đang loại bỏ khoảng trống mặc định này, giúp kiểm soát được giao diện trang web một cách chặt chẽ hơn.*/
+    box-sizing: border-box; /*quy định cách tính toán kích thước của một phần tử, bao gồm cả padding và border*/
+
+}
+.btn {
+    background-color: transparent; /*Đặt màu nền của nút là trong suốt*/
+    padding: 15px 30px;  /*Đặt các giá trị lề (padding) cho nút. Trong trường hợp này, nút sẽ có lề 15px ở trên và dưới, và 30px ở bên trái và phải.*/
+    border: 2px solid var(--sub-coler); /*Đặt đường viền của nút*/
+    border-radius: 50px; /*Đặt bán kính của góc của nút, tạo ra hiệu ứng nút tròn hoặc nút oval.*/
+    color: var(--sub-coler);/*Đặt màu chữ của nút*/
+    cursor: pointer;/*Thiết lập con trỏ chuột khi di chuột qua nút để hiển thị dạng "pointer", cho biết rằng nút có thể được nhấp để thực hiện một hành động.*/
+    transition: all 0.3s ease; /*Thiết lập hiệu ứng chuyển động cho tất cả các thuộc tính của nút khi chúng thay đổi*/
+}
+.btn:hover {
+    background-color: #ffffff; /*hi con trỏ chuột được di chuyển qua nút (hover), màu nền của nút sẽ thay đổi thành trắng */
+}
+
+ul {
+    list-style: none;/*được sử dụng để loại bỏ các dấu đầu dòng mặc định (như dấu chấm hay số)*/
+}
+a {
+    text-decoration: none;/*được sử dụng để loại bỏ gạch chân mặc định từ văn bản trên trang web*/
+}
+.section-pading {
+    padding: 80px 0;
+}
+.justify-content {
+    justify-content: space-between; /*để căn chỉnh các phần tử con bên trong một container theo một trục chính (main axis), với khoảng cách đều giữa các phần tử và hai đầu của container.*/
+}
+.container {
+    margin: auto;
+    max-width: 1200px; /* Thiết lập giá trị tối đa cho chiều rộng của phần tử là 1200px*/
+}
+.row {
+    display: flex;/*Đặt kiểu hiển thị của phần tử là flex, biến nó thành một flex container,container này sẽ được xem xét là các phần tử flex item.*/
+    flex-wrap: wrap;/*Thiết lập cho các flex items được phép wrap (tự động xuống dòng) nếu chúng không thể hiển thị trên một dòng duy nhất*/
+}
+.top {
+    background-color: transparent;
+    position: fixed; /*Đặt vị trí của phần tử là cố định (fixed)*/
+    width: 100vw; /*Đặt chiều rộng của phần tử là 100% của chiều rộng của viewport*/
+    z-index: 99;/*phần tử sẽ hiển thị ở phía trên các phần tử khác có chỉ số z thấp hơn.*/
+}
+.top::before{
+    content: ""; /*Thiết lập nội dung của pseudo-element,nội dung được thiết lập là một chuỗi rỗng*/
+    display: block; /*hiết lập kiểu hiển thị của pseudo-element là block-level*/
+    position: absolute;/*Đặt vị trí của pseudo-element là tuyệt đối (absolute)*/
+    width: 100%;
+    height: 100%;
+    background-color: var(--main-coler);
+    z-index: -1;
+    transform: translateY(-100%);
+    transition: all 0.3s ease; /*hiết lập một hiệu ứng chuyển đổi (transition) cho tất cả các thuộc tính của phần tử, kéo dài trong 0.3 giây với một hàm easing được thiết lập là "ease"*/
+}
+.top.active::before {
+    transform: translateY(0);/*biến đổi (transform) để dịch chuyển phần tử theo hướng dọc (trục y) bằng một giá trị pixel hoặc phần trăm.*/
+}
+.top .logo img{
+    width: 80px;
+
+}
+.top .menu-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;/*sử dụng để thay đổi hình dạng của con trỏ chuột khi di chuyển qua phần tử đó.*/
+    transform: all 0.3s ease;
+}
+.top .menu-bar.active {
+    position: fixed;
+    top: 30px;
+    right: 0;
+    transform: translateX(-200px);
+    z-index: 1;
+}
+.top .menu-bar.active span {
+    background-color: transparent;
+}
+.top .menu-bar.active span::before {
+    transform: rotate(-135deg);
+}
+.top .menu-bar.active span::after{
+    transform: rotate(135deg);
+}
+.top .menu-bar span {
+    display: block;
+    height: 2px;
+    width: 40px;
+    background-color: var(--sub-coler);
+    position: relative;
+}
+.top .menu-bar span::before {
+    height: 100%;
+    width: 100%;
+    content: "";
+    display: block;
+    position: absolute;
+    transform: translateY(-10px);
+    background-color: var(--sub-coler);
+    transition: all 0.3s ease;
+}
+.top .menu-bar span::after {
+    height: 100%;
+    width: 100%;
+    content: "";
+    display: block;
+    position: absolute;
+    transform: translateY(10px);
+    background-color: var(--sub-coler);
+    transition: all 0.3s ease;
+}
+.menu-items{
+    position: fixed;
+    width: 250px;
+    height: 100vh;
+    background-color: var(--main-coler);
+    right: 0;
+    top: 0;
+    padding: 100px 50px;
+    transform: translateX(100%);
+    transform: all 0.3s ease;
+}
+.menu-items.active {
+    transform: translateX(0);
+}
+.menu-items a {
+    color: var(--test-coler);
+    line-height: 40px;
+    font-size: 25px;
+    font-family: "R";
+
+}
+
+/* big-image */
+.big-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+.big-image::before{
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url(image/logo2.jpg) ;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    z-index: -2;
+    animation: Inout 5s infinite;
+}
+@keyframes Inout {
+    0%,100%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.1);
+    }
+}
+.big-image::after{
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.3;
+    z-index: -2;
+
+}
+.big-image .big-image-content {
+    text-align: center;
+    max-width: 500px;
+}
+.big-image .big-image-content h2 {
+    font-size: 50px;
+    color:var(--test-coler);
+
+}
+.big-image .big-image-content p {
+    font-size: 25px;
+    color:var(--test-coler);
+    font-weight: bold;
+    margin: 15px;
+}
+/*about*/
+.about {
+    background-color: var(--main-coler);
+}
+.section-title{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.section-title h2{
+    font-size: 40px;
+    color: var(--test-coler);
+    text-transform: uppercase;
+}
+.section-title h2::before{
+    content: attr(data-title);
+    display: block;
+    color: var(--sub-coler);
+    font-size: 30px;
+    
+}
+.about .about-item h2{
+    color: var(--test-coler);
+    font-size: 35px;
+}
+.about .about-item p{
+    font-size: 18px;
+    margin: 15px 0 30px;
+    color: var(--test-coler);
+}
+.about .about-item img {
+    width: 100%;
+    border-radius: 10px;
+}
+.about-item {
+    width: calc(100%/2);
+    
+}
+.about-item-img{
+    position: relative;
+}
+.about-item-img span{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: var(--main-coler);
+    font-weight: 900;
+    font-size: 25px;
+    transform: translate(-50%,-50%);
+}
+.about-item-img::before {
+    content: "";
+    display: block;
+    width: 100px;
+    height: 100px;
+    border: 3px solid var(--sub-coler);
+    position: absolute;
+    top: calc(50% - 50px);
+    left: calc(50% - 50px);
+    animation: xoayVong 5s infinite;
+}
+@keyframes xoayVong {
+    0% {transform: rotate(0deg);}
+    100%{transform: rotate(360deg);}
+}
+/* menu*/
+.menu {
+    background-color: var(--bg-coler);
+}
+.menu-title {
+    width: 100%;
+    text-align: center;
+}
+.menu-title .menu-button {
+    background-color: transparent;
+    margin: 10px 12px;
+    border: none;
+    font-size: 25px;
+    color: var(--test-coler);
+    cursor: pointer;
+}
+.menu-title .menu-button.active {
+    color: var(--sub-coler);
+}
+.menu-title .menu-button:hover {
+    color: var(--sub-coler);
+
+}
+.food-items{
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 15px;
+    position: relative;
+}
+.food-items::before{
+    content: "";
+    display: block;
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    bottom: 0;
+    border: 1px dashed var(--main-coler);
+    
+
+}
+.food-items:hover .food-item p{
+    color: var(--sub-coler);
+
+}
+.food-items:hover .food-price p{
+    color: var(--test-coler);
+}
+.food-item {
+    display: flex;
+    align-items: center;
+}
+.food-item img{
+    width: 150px;
+    margin-right: 25px;
+
+}
+.food-item p {
+    color: var(--test-coler);
+    transition: all 0.3s ease-in;
+    font-size: 20px;
+}
+.food-price p{
+    color: var(--sub-coler);
+    transition: all 0.3s ease-in;
+    font-size: 20px;
+}
+.menu-item-content {
+    display: none;
+}
+.menu-item-content.active{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+/*phan hoi*/
+.phan-hoi {
+    background-color: var(--main-coler);
+}
+.phan-hoi-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.phan-hoi-item:hover img{
+    border-color: 4px solid var(--sub-coler);
+}
+.phan-hoi-item {
+    width: calc(100%/3 - 30px);
+    margin: 0 15px;
+    border: 2px solid var(--bg-coler);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0,0,0,15px rgba(0, 0, 0, 0.7);
+}
+.phan-hoi-item span{
+    color: var(--test-coler);
+}
+.phan-hoi-item h2{
+    font-size: 20px;
+    color: var(--test-coler);
+
+}
+.phan-hoi-item p{
+    color: var(--test-coler);
+    font-size: 18px;
+    margin: 20px 0;
+
+}
+.phan-hoi-item img {
+    width: 100px;
+    border-radius: 50%;
+    border: 4px solid var(--bg-coler);
+    transition: all 0.5s ease;
+}
+.phan-hoi-item-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.phan-hoi-item-star i{
+    color: var(--sub-coler);
+}
+/*----------Team------*/
+.team {
+    background-color: var(--bg-coler);
+}
+.team-items {
+    padding: 15px;
+    width: calc(100%/3);
+    position: relative;
+}
+.team-items img{
+    width: 100%;
+    border-radius: 10px;
+    transition: all 0.5s ease;
+
+}
+.team-items:hover .team-items-text{
+    background-color: var(--sub-coler);
+    transform: translateY(-50px);
+}
+.team-items:hover img{
+    transform: skewX(2deg);
+}
+.team-items-text {
+    position: absolute;
+    padding: 15px 0;
+    right: 30px;
+    left: 30px;
+    bottom: 0;
+    background-color: var(--main-coler);
+    text-align: center;
+    border-radius: 10px;
+    transform: translateY(50%);
+    transition: all 0.5s ease;
+}
+.team-items-text h2 {
+    color: var(--test-coler);
+}
+.team-items-text span {
+    color: var(--test-coler);
+}
+/*-------------footer--*/
+.footer {
+   
+    padding-top: 80px;
+   
+    position: relative;
+}
+.footer-bg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("image/footer.jpg");
+    z-index: -2;
+}
+.footer::before{
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    top: 0;
+    opacity: 0.4;
+    z-index: -1;
+}
+.footer-item{
+    text-align: center;
+    width: calc(100%/3);
+}
+.footer-item i{
+    color: #ffffff;
+    font-size: 25px;
+    margin-right: 12px;
+    cursor: pointer;
+    transition: var(--sub-coler);
+}
+.footer-item i:hover{
+    color: var(--sub-coler);
+}
+.footer h2{
+    color: var(--test-coler);
+    font-size: 25px;
+    margin-bottom: 12px;
+}
+.footer p {
+    color: var(--test-coler);
+    margin: 12px 0;
+}
+.footer-copyright{
+    text-align: center;
+    padding: 50px 0 12px;
+    color: #ffffff;
+    margin-top: 20px;
+    border-top: 2px solid var(--bg-coler);
+}
